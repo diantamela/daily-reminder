@@ -1,66 +1,42 @@
 @extends('layouts.admin-sidebar')
 
 @section('content')
-<!-- Statistics Cards -->
-<div class="row mb-4">
-    <div class="col-md-3 mb-3">
-        <div class="stats-card p-4 text-center">
-            <i class="fas fa-bell fa-3x mb-3 text-warning"></i>
-            <h3 class="mb-2">{{ $reminders->total() }}</h3>
-            <p class="mb-0 opacity-75">Total Reminders</p>
-        </div>
-    </div>
-    <div class="col-md-3 mb-3">
-        <div class="stats-card p-4 text-center">
-            <i class="fas fa-check-circle fa-3x mb-3 text-success"></i>
-            <h3 class="mb-2">{{ $reminders->where('is_active', true)->count() }}</h3>
-            <p class="mb-0 opacity-75">Active Reminders</p>
-        </div>
-    </div>
-    <div class="col-md-3 mb-3">
-        <div class="stats-card p-4 text-center">
-            <i class="fas fa-clock fa-3x mb-3 text-info"></i>
-            <h3 class="mb-2">{{ $reminders->where('is_active', false)->count() }}</h3>
-            <p class="mb-0 opacity-75">Inactive Reminders</p>
-        </div>
-    </div>
-    <div class="col-md-3 mb-3">
-        <div class="stats-card p-4 text-center">
-            <i class="fas fa-calendar-day fa-3x mb-3 text-primary"></i>
-            <h3 class="mb-2">{{ $reminders->whereNotNull('scheduled_date')->count() }}</h3>
-            <p class="mb-0 opacity-75">Scheduled Today</p>
-        </div>
-    </div>
-</div>
-
     <!-- Statistics Cards -->
-    <div class="row mb-4">
-        <div class="col-md-3 mb-3">
-            <div class="admin-stats-card p-4 text-center">
-                <i class="fas fa-bell fa-2x mb-3 text-warning"></i>
-                <h4 class="mb-1">{{ $reminders->total() }}</h4>
-                <p class="mb-0 opacity-75">Total Reminders</p>
+    <div class="row g-3 mb-4">
+        <div class="col-6 col-md-3">
+            <div class="admin-stats-card d-flex align-items-center p-4">
+                <i class="fas fa-bell fa-2x me-3 text-blue-600"></i>
+                <div class="flex-grow-1">
+                    <h4 class="mb-1 text-blue-900 fw-bold">{{ $reminders->total() }}</h4>
+                    <p class="mb-0 opacity-75 text-blue-700 small">Total Reminders</p>
+                </div>
             </div>
         </div>
-        <div class="col-md-3 mb-3">
-            <div class="admin-stats-card p-4 text-center">
-                <i class="fas fa-check-circle fa-2x mb-3 text-success"></i>
-                <h4 class="mb-1">{{ $reminders->where('is_active', true)->count() }}</h4>
-                <p class="mb-0 opacity-75">Active Reminders</p>
+        <div class="col-6 col-md-3">
+            <div class="admin-stats-card d-flex align-items-center p-4">
+                <i class="fas fa-check-circle fa-2x me-3 text-green-600"></i>
+                <div class="flex-grow-1">
+                    <h4 class="mb-1 text-blue-900 fw-bold">{{ $reminders->where('is_active', true)->count() }}</h4>
+                    <p class="mb-0 opacity-75 text-blue-700 small">Active Reminders</p>
+                </div>
             </div>
         </div>
-        <div class="col-md-3 mb-3">
-            <div class="admin-stats-card p-4 text-center">
-                <i class="fas fa-clock fa-2x mb-3 text-info"></i>
-                <h4 class="mb-1">{{ $reminders->where('is_active', false)->count() }}</h4>
-                <p class="mb-0 opacity-75">Inactive Reminders</p>
+        <div class="col-6 col-md-3">
+            <div class="admin-stats-card d-flex align-items-center p-4">
+                <i class="fas fa-clock fa-2x me-3 text-blue-500"></i>
+                <div class="flex-grow-1">
+                    <h4 class="mb-1 text-blue-900 fw-bold">{{ $reminders->where('is_active', false)->count() }}</h4>
+                    <p class="mb-0 opacity-75 text-blue-700 small">Inactive Reminders</p>
+                </div>
             </div>
         </div>
-        <div class="col-md-3 mb-3">
-            <div class="admin-stats-card p-4 text-center">
-                <i class="fas fa-calendar-day fa-2x mb-3 text-primary"></i>
-                <h4 class="mb-1">{{ $reminders->whereNotNull('scheduled_date')->count() }}</h4>
-                <p class="mb-0 opacity-75">Scheduled Today</p>
+        <div class="col-6 col-md-3">
+            <div class="admin-stats-card d-flex align-items-center p-4">
+                <i class="fas fa-calendar-day fa-2x me-3 text-indigo-600"></i>
+                <div class="flex-grow-1">
+                    <h4 class="mb-1 text-blue-900 fw-bold">{{ $reminders->whereNotNull('scheduled_date')->count() }}</h4>
+                    <p class="mb-0 opacity-75 text-blue-700 small">Scheduled Today</p>
+                </div>
             </div>
         </div>
     </div>
@@ -79,7 +55,7 @@
     @if(session('info'))
         <div class="row mb-4">
             <div class="col-md-12">
-                <div class="alert alert-info border-0" style="background: linear-gradient(45deg, #1e3c72, #2a5298); color: white; border-radius: 0.75rem;">
+                <div class="alert alert-info border-0" style="background: linear-gradient(45deg, #3b82f6, #2563eb); color: white; border-radius: 0.75rem;">
                     <i class="fas fa-info-circle me-2"></i>{{ session('info') }}
                 </div>
             </div>

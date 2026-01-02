@@ -14,227 +14,100 @@
     <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     
-    <style>
-        body {
-            font-family: 'Figtree', sans-serif;
-            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
-            min-height: 100vh;
-        }
-        .admin-navbar {
-            backdrop-filter: blur(10px);
-            background: rgba(30, 60, 114, 0.95) !important;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-        .admin-navbar .navbar-brand {
-            color: white !important;
-            font-weight: 700;
-            font-size: 1.5rem;
-        }
-        .admin-navbar .nav-link {
-            color: rgba(255, 255, 255, 0.9) !important;
-            font-weight: 500;
-            transition: all 0.3s ease;
-        }
-        .admin-navbar .nav-link:hover {
-            color: white !important;
-            transform: translateY(-1px);
-        }
-        .admin-navbar .dropdown-menu {
-            background: rgba(30, 60, 114, 0.95);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            backdrop-filter: blur(10px);
-        }
-        .admin-navbar .dropdown-item {
-            color: rgba(255, 255, 255, 0.9) !important;
-            transition: all 0.3s ease;
-        }
-        .admin-navbar .dropdown-item:hover {
-            background: rgba(255, 255, 255, 0.1);
-            color: white !important;
-            transform: translateX(5px);
-        }
-        .admin-card {
-            border: none;
-            border-radius: 1rem;
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-            backdrop-filter: blur(10px);
-            background: rgba(255, 255, 255, 0.95);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-        .admin-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 25px 30px -5px rgba(0, 0, 0, 0.15);
-        }
-        .admin-card-header {
-            background: linear-gradient(45deg, #1e3c72, #2a5298) !important;
-            color: white;
-            border-radius: 1rem 1rem 0 0 !important;
-            border: none;
-            padding: 1.5rem;
-        }
-        .admin-btn-primary {
-            background: linear-gradient(45deg, #1e3c72, #2a5298);
-            border: none;
-            border-radius: 0.75rem;
-            padding: 0.75rem 2rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 6px rgba(30, 60, 114, 0.3);
-        }
-        .admin-btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 12px rgba(30, 60, 114, 0.4);
-            background: linear-gradient(45deg, #2a5298, #1e3c72);
-        }
-        .admin-btn-success {
-            background: linear-gradient(45deg, #28a745, #20c997);
-            border: none;
-            border-radius: 0.75rem;
-            font-weight: 600;
-            box-shadow: 0 4px 6px rgba(40, 167, 69, 0.3);
-        }
-        .admin-btn-success:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 12px rgba(40, 167, 69, 0.4);
-        }
-        .admin-btn-danger {
-            background: linear-gradient(45deg, #dc3545, #e74c3c);
-            border: none;
-            border-radius: 0.75rem;
-            font-weight: 600;
-            box-shadow: 0 4px 6px rgba(220, 53, 69, 0.3);
-        }
-        .admin-btn-danger:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 12px rgba(220, 53, 69, 0.4);
-        }
-        .admin-badge {
-            border-radius: 2rem;
-            padding: 0.5rem 1rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-        .admin-table {
-            border-radius: 0.75rem;
-            overflow: hidden;
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-        }
-        .admin-table thead th {
-            background: linear-gradient(45deg, #1e3c72, #2a5298);
-            color: white;
-            border: none;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-        .admin-table tbody tr {
-            transition: all 0.3s ease;
-        }
-        .admin-table tbody tr:hover {
-            background: rgba(30, 60, 114, 0.05);
-            transform: scale(1.01);
-        }
-        .admin-form-control {
-            border-radius: 0.75rem;
-            border: 2px solid #e2e8f0;
-            padding: 0.75rem 1rem;
-            transition: all 0.3s ease;
-        }
-        .admin-form-control:focus {
-            border-color: #1e3c72;
-            box-shadow: 0 0 0 3px rgba(30, 60, 114, 0.1);
-            transform: translateY(-1px);
-        }
-        .admin-alert {
-            border-radius: 0.75rem;
-            border: none;
-            backdrop-filter: blur(10px);
-            font-weight: 500;
-        }
-        .admin-alert-success {
-            background: linear-gradient(45deg, #28a745, #20c997);
-            color: white;
-        }
-        .admin-alert-info {
-            background: linear-gradient(45deg, #1e3c72, #2a5298);
-            color: white;
-        }
-        .admin-stats-card {
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 1rem;
-            backdrop-filter: blur(10px);
-            color: white;
-            transition: all 0.3s ease;
-        }
-        .admin-stats-card:hover {
-            transform: translateY(-5px);
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0.1));
-        }
-    </style>
+
 </head>
-<body class="bg-gray-100">
+<body class="bg-gray-50 min-h-screen">
     <div id="app">
-        <nav class="navbar navbar-expand-md admin-navbar navbar-dark">
-            <div class="container">
-                <a class="navbar-brand" href="{{ url('/admin/dashboard') }}">
-                    <i class="fas fa-shield-alt me-2"></i>Admin Panel
-                </a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
+        <nav class="bg-white shadow-sm border-b">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex justify-between h-16">
+                    <div class="flex items-center">
+                        <a class="text-blue-600 text-xl font-bold hover:text-blue-700 transition-colors" href="{{ url('/admin/dashboard') }}">
+                            <i class="fas fa-shield-alt mr-2"></i>Daily Reminder Admin
+                        </a>
+                    </div>
 
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <!-- Left Side Of Navbar -->
-                    <ul class="navbar-nav me-auto">
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('admin.dashboard') }}">
-                                <i class="fas fa-tachometer-alt me-1"></i>Dashboard
-                            </a>
-                        </li>
-                    </ul>
+                    <div class="hidden md:flex items-center space-x-4">
+                        <a class="text-gray-600 hover:text-blue-600 transition-colors px-3 py-2 rounded-md text-sm font-medium" href="{{ route('admin.dashboard') }}">
+                            <i class="fas fa-tachometer-alt mr-1"></i>Dashboard
+                        </a>
+                        
+                        <div class="relative group">
+                            <button class="text-gray-600 hover:text-blue-600 transition-colors flex items-center space-x-1 px-3 py-2 rounded-md text-sm font-medium hover:bg-gray-50">
+                                <i class="fas fa-user-shield mr-1"></i>
+                                <span>{{ Auth::user()->name }}</span>
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                                </svg>
+                            </button>
 
-                    <!-- Right Side Of Navbar -->
-                    <ul class="navbar-nav ms-auto">
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="fas fa-user-shield me-1"></i>{{ Auth::user()->name }}
-                            </a>
-
-                            <div class="dropdown-menu dropdown-menu-end">
-                                <a class="dropdown-item" href="{{ route('admin.reminders.create') }}">
-                                    <i class="fas fa-plus me-2"></i>Create Reminder
+                            <div class="absolute right-0 mt-2 w-56 bg-white rounded-lg shadow-lg border border-gray-200 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
+                                <a class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-blue-600 transition-all duration-200" href="{{ route('admin.reminders.create') }}">
+                                    <i class="fas fa-plus mr-2"></i>Create Reminder
                                 </a>
-                                <a class="dropdown-item" href="{{ route('home') }}">
-                                    <i class="fas fa-home me-2"></i>View User Site
+                                <a class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-blue-600 transition-all duration-200" href="{{ route('home') }}">
+                                    <i class="fas fa-home mr-2"></i>View User Site
                                 </a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="{{ route('logout') }}"
+                                <hr class="my-1 border-gray-200">
+                                <a class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-blue-600 transition-all duration-200" href="{{ route('logout') }}"
                                    onclick="event.preventDefault();
                                                  document.getElementById('logout-form').submit();">
-                                    <i class="fas fa-sign-out-alt me-2"></i>{{ __('Logout') }}
+                                    <i class="fas fa-sign-out-alt mr-2"></i>{{ __('Logout') }}
                                 </a>
 
-                                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="hidden">
                                     @csrf
                                 </form>
                             </div>
-                        </li>
-                    </ul>
+                        </div>
+                    </div>
+                    
+                    <!-- Mobile menu button -->
+                    <div class="md:hidden flex items-center">
+                        <button type="button" class="text-gray-600 hover:text-blue-600 focus:outline-none focus:text-blue-600" id="mobile-menu-button">
+                            <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Mobile menu -->
+                <div class="hidden md:hidden" id="mobile-menu">
+                    <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                        <a class="block px-3 py-2 text-base font-medium text-gray-600 hover:text-blue-600 hover:bg-gray-50 rounded-md transition-colors" href="{{ route('admin.dashboard') }}">
+                            <i class="fas fa-tachometer-alt mr-2"></i>Dashboard
+                        </a>
+                        <div class="text-gray-500 px-3 py-2 text-sm font-medium">{{ Auth::user()->name }}</div>
+                        <a class="block px-3 py-2 text-base font-medium text-gray-600 hover:text-blue-600 hover:bg-gray-50 rounded-md transition-colors" href="{{ route('admin.reminders.create') }}">
+                            <i class="fas fa-plus mr-2"></i>Create Reminder
+                        </a>
+                        <a class="block px-3 py-2 text-base font-medium text-gray-600 hover:text-blue-600 hover:bg-gray-50 rounded-md transition-colors" href="{{ route('home') }}">
+                            <i class="fas fa-home mr-2"></i>View User Site
+                        </a>
+                        <a class="block px-3 py-2 text-base font-medium text-gray-600 hover:text-blue-600 hover:bg-gray-50 rounded-md transition-colors" href="{{ route('logout') }}"
+                           onclick="event.preventDefault();
+                                         document.getElementById('logout-form').submit();">
+                            <i class="fas fa-sign-out-alt mr-2"></i>{{ __('Logout') }}
+                        </a>
+                    </div>
                 </div>
             </div>
         </nav>
+        
+        <script>
+            // Mobile menu toggle
+            document.getElementById('mobile-menu-button').addEventListener('click', function() {
+                const menu = document.getElementById('mobile-menu');
+                menu.classList.toggle('hidden');
+            });
+        </script>
 
-        <main class="py-4">
+        <main class="py-8">
             @yield('content')
         </main>
     </div>
     
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://kit.fontawesome.com/your-fontawesome-kit.js" crossorigin="anonymous"></script>
+
 </body>
 </html>
