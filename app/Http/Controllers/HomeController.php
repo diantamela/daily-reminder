@@ -14,6 +14,11 @@ class HomeController extends Controller
 {
     public function index()
     {
+        // Check if user is admin - redirect them away from home page
+        if (Auth::check() && Auth::user()->hasRole('admin')) {
+            return redirect()->route('admin.dashboard')->with('info', 'Admins should use the Admin Dashboard to manage reminders.');
+        }
+        
         $today = now()->toDateString();
         
         // Try to get today's scheduled reminder first

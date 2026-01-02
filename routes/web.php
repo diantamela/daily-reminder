@@ -9,7 +9,7 @@ Route::get('/', function () {
     return view('landing');
 })->name('landing');
 
-// Authenticated user dashboard
+// Authenticated user dashboard - redirect admins away
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 
 // Authentication routes

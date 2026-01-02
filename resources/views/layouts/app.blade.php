@@ -17,29 +17,122 @@
     <style>
         body {
             font-family: 'Figtree', sans-serif;
-            background-color: #f8fafc;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        .navbar {
+            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.95) !important;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
         }
         .card {
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
             border: none;
+            border-radius: 1rem;
+            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.95);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 25px 30px -5px rgba(0, 0, 0, 0.15);
         }
         .reminder-card {
-            min-height: 300px;
+            min-height: 350px;
             display: flex;
             flex-direction: column;
             justify-content: center;
+            padding: 2rem;
+        }
+        .reminder-message {
+            font-size: 1.4rem;
+            line-height: 1.6;
+            color: #2d3748;
+            font-weight: 500;
+            margin-bottom: 1.5rem;
+            text-align: center;
         }
         .category-badge {
-            font-size: 0.75rem;
-            padding: 0.25rem 0.5rem;
+            font-size: 0.875rem;
+            padding: 0.5rem 1rem;
+            border-radius: 2rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
         .streak-badge {
-            background-color: #10b981;
+            background: linear-gradient(45deg, #10b981, #34d399) !important;
             color: white;
+            border-radius: 2rem;
+            padding: 0.5rem 1rem;
+            font-weight: 600;
+            box-shadow: 0 4px 6px rgba(16, 185, 129, 0.3);
         }
         .days-badge {
-            background-color: #3b82f6;
+            background: linear-gradient(45deg, #3b82f6, #60a5fa) !important;
             color: white;
+            border-radius: 2rem;
+            padding: 0.5rem 1rem;
+            font-weight: 600;
+            box-shadow: 0 4px 6px rgba(59, 130, 246, 0.3);
+        }
+        .btn {
+            border-radius: 2rem;
+            padding: 0.75rem 2rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: all 0.3s ease;
+        }
+        .btn-primary {
+            background: linear-gradient(45deg, #3b82f6, #60a5fa);
+            border: none;
+            box-shadow: 0 4px 6px rgba(59, 130, 246, 0.3);
+        }
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 12px rgba(59, 130, 246, 0.4);
+        }
+        .btn-success {
+            background: linear-gradient(45deg, #10b981, #34d399);
+            border: none;
+            box-shadow: 0 4px 6px rgba(16, 185, 129, 0.3);
+        }
+        .btn-success:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 12px rgba(16, 185, 129, 0.4);
+        }
+        .form-control {
+            border-radius: 1rem;
+            border: 2px solid #e2e8f0;
+            padding: 0.75rem 1rem;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+        .form-control:focus {
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+        }
+        .alert {
+            border-radius: 1rem;
+            border: none;
+            backdrop-filter: blur(10px);
+        }
+        .alert-info {
+            background: linear-gradient(45deg, #3b82f6, #60a5fa);
+            color: white;
+        }
+        .text-success {
+            color: #10b981 !important;
+            font-weight: 600;
+        }
+        .container {
+            max-width: 800px;
+        }
+        .header-stats {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 1rem;
+            padding: 1rem;
+            backdrop-filter: blur(10px);
         }
     </style>
 </head>
@@ -80,10 +173,14 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-end">
-                                    <a class="dropdown-item" href="{{ route('reflections.index') }}">My Reflections</a>
+                                    @if(!Auth::user()->hasRole('admin'))
+                                        <a class="dropdown-item" href="{{ route('home') }}">Home</a>
+                                        <a class="dropdown-item" href="{{ route('reflections.index') }}">My Reflections</a>
+                                    @endif
                                     
                                     @if(Auth::user()->hasRole('admin'))
                                         <a class="dropdown-item" href="{{ route('admin.dashboard') }}">Admin Dashboard</a>
+                                        <a class="dropdown-item" href="{{ route('admin.reminders.create') }}">Create Reminder</a>
                                     @endif
                                     
                                     <a class="dropdown-item" href="{{ route('logout') }}"
