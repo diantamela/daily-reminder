@@ -12,6 +12,43 @@ use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {
+    /**
+     * Show the landing page with daily reminder content
+     */
+    public function landing(Request $request)
+    {
+        $today = now()->toDateString();
+        $isShuffle = $request->has('shuffle');
+        
+        // If shuffle is requested, always get a random reminder
+        if ($isShuffle) {
+            $reminder = Reminder::where('is_active', true)
+                              ->inRandomOrder()
+                              ->first();
+        } else {
+            // Try to get today's scheduled reminder first
+            $reminder = Reminder::where('scheduled_date', $today)
+                              ->where('is_active', true)
+                              ->first();
+            
+            // If no scheduled reminder for today, get a random active one
+            if (!$reminder) {
+                $randomReminders = Reminder::where('is_active', true)
+                                          ->where(function($query) use ($today) {
+                                              $query->whereNull('scheduled_date')
+                                                    ->orWhere('scheduled_date', '!=', $today);
+                                          })
+                                          ->inRandomOrder()
+                                          ->limit(1)
+                                          ->get();
+                
+                $reminder = $randomReminders->first();
+            }
+        }
+        
+        return view('landing', compact('reminder'));
+    }
+    
     public function index()
     {
         // Check if user is admin - redirect them away from home page

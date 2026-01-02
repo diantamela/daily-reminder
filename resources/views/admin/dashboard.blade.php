@@ -1,9 +1,9 @@
 @extends('layouts.admin-sidebar')
 
 @section('content')
-    <!-- Statistics Cards -->
-    <div class="row g-3 mb-4">
-        <div class="col-6 col-md-3">
+    <!-- Statistics Cards - Horizontal Layout -->
+    <div class="d-flex gap-3 mb-4" style="flex-wrap: nowrap;">
+        <div class="flex-fill">
             <div class="admin-stats-card d-flex align-items-center p-4">
                 <i class="fas fa-bell fa-2x me-3 text-blue-600"></i>
                 <div class="flex-grow-1">
@@ -12,7 +12,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-6 col-md-3">
+        <div class="flex-fill">
             <div class="admin-stats-card d-flex align-items-center p-4">
                 <i class="fas fa-check-circle fa-2x me-3 text-green-600"></i>
                 <div class="flex-grow-1">
@@ -21,7 +21,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-6 col-md-3">
+        <div class="flex-fill">
             <div class="admin-stats-card d-flex align-items-center p-4">
                 <i class="fas fa-clock fa-2x me-3 text-blue-500"></i>
                 <div class="flex-grow-1">
@@ -30,7 +30,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-6 col-md-3">
+        <div class="flex-fill">
             <div class="admin-stats-card d-flex align-items-center p-4">
                 <i class="fas fa-calendar-day fa-2x me-3 text-indigo-600"></i>
                 <div class="flex-grow-1">
@@ -134,15 +134,15 @@
                                                     </td>
                                                     <td>
                                                         <div class="btn-group" role="group">
-                                                            <a href="{{ route('admin.reminders.edit', $reminder->id) }}" class="admin-btn-primary btn btn-sm">
-                                                                <i class="fas fa-edit me-1"></i>Edit
+                                                            <a href="{{ route('admin.reminders.edit', $reminder->id) }}" class="admin-btn-primary btn btn-sm" title="Edit">
+                                                                <i class="fas fa-edit"></i>
                                                             </a>
                                                             
                                                             <form action="{{ route('admin.reminders.destroy', $reminder->id) }}" method="POST" class="d-inline">
                                                                 @csrf
                                                                 @method('DELETE')
-                                                                <button type="submit" class="admin-btn-danger btn btn-sm" onclick="return confirm('Are you sure you want to delete this reminder?')">
-                                                                    <i class="fas fa-trash me-1"></i>Delete
+                                                                <button type="submit" class="admin-btn-danger btn btn-sm" title="Delete" onclick="return confirm('Are you sure you want to delete this reminder?')">
+                                                                    <i class="fas fa-trash"></i>
                                                                 </button>
                                                             </form>
                                                         </div>

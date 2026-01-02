@@ -409,6 +409,191 @@
         .overlay.show {
             display: block;
         }
+        
+        /* Table Styles */
+        .admin-table {
+            background: white;
+            border-radius: 0.5rem;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .admin-table th {
+            background: linear-gradient(135deg, #3b82f6, #2563eb);
+            color: white;
+            border: none;
+            padding: 1rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-size: 0.875rem;
+        }
+        
+        .admin-table td {
+            padding: 1rem;
+            border-color: rgba(59, 130, 246, 0.1);
+            vertical-align: middle;
+        }
+        
+        .admin-table tbody tr:hover {
+            background: rgba(59, 130, 246, 0.05);
+        }
+        
+        /* Action Button Styles */
+        .admin-btn-primary {
+            background: linear-gradient(45deg, #3b82f6, #2563eb);
+            border: none;
+            color: white;
+            padding: 0.5rem 0.75rem;
+            border-radius: 0.375rem;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .admin-btn-primary:hover {
+            background: linear-gradient(45deg, #2563eb, #1d4ed8);
+            color: white;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 8px rgba(59, 130, 246, 0.3);
+        }
+        
+        .admin-btn-danger {
+            background: linear-gradient(45deg, #ef4444, #dc2626);
+            border: none;
+            color: white;
+            padding: 0.5rem 0.75rem;
+            border-radius: 0.375rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .admin-btn-danger:hover {
+            background: linear-gradient(45deg, #dc2626, #b91c1c);
+            color: white;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 8px rgba(239, 68, 68, 0.3);
+        }
+        
+        /* Badge Styles */
+        .admin-badge {
+            padding: 0.375rem 0.75rem;
+            border-radius: 0.375rem;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .admin-badge.bg-success {
+            background: linear-gradient(45deg, #10b981, #059669);
+            color: white;
+        }
+        
+        .admin-badge.bg-info {
+            background: linear-gradient(45deg, #3b82f6, #2563eb);
+            color: white;
+        }
+        
+        .admin-badge.bg-warning {
+            background: linear-gradient(45deg, #f59e0b, #d97706);
+            color: white;
+        }
+        
+        .admin-badge.bg-secondary {
+            background: linear-gradient(45deg, #6b7280, #4b5563);
+            color: white;
+        }
+        
+        /* Statistics Card Styles */
+        .admin-stats-card {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(239, 246, 255, 0.9) 100%);
+            border: 1px solid rgba(59, 130, 246, 0.1);
+            border-radius: 1rem;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.1);
+            height: 100%;
+        }
+        
+        .admin-stats-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(59, 130, 246, 0.2);
+        }
+        
+        /* Pagination Styles */
+        .pagination {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 0.5rem;
+            margin: 0;
+            padding: 1rem 0;
+        }
+        
+        .pagination .page-item {
+            list-style: none;
+        }
+        
+        .pagination .page-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.75rem 1rem;
+            margin: 0 0.25rem;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(239, 246, 255, 0.8) 100%);
+            border: 1px solid rgba(59, 130, 246, 0.2);
+            border-radius: 0.5rem;
+            color: #3b82f6;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            min-width: 3rem;
+            height: 3rem;
+        }
+        
+        .pagination .page-link:hover {
+            background: linear-gradient(135deg, #3b82f6, #2563eb);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+            border-color: #3b82f6;
+        }
+        
+        .pagination .page-item.active .page-link {
+            background: linear-gradient(135deg, #3b82f6, #2563eb);
+            color: white;
+            border-color: #3b82f6;
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+        }
+        
+        .pagination .page-item.disabled .page-link {
+            background: rgba(229, 231, 235, 0.5);
+            color: #9ca3af;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+        
+        .pagination .page-item.disabled .page-link:hover {
+            background: rgba(229, 231, 235, 0.5);
+            color: #9ca3af;
+            transform: none;
+            box-shadow: none;
+        }
+        
+        .pagination-info {
+            text-align: center;
+            margin: 1rem 0;
+            padding: 0.75rem;
+            background: linear-gradient(135deg, rgba(239, 246, 255, 0.8) 0%, rgba(219, 234, 254, 0.6) 100%);
+            border-radius: 0.5rem;
+            border: 1px solid rgba(59, 130, 246, 0.1);
+            color: #1e40af;
+            font-weight: 500;
+        }
     </style>
 </head>
 <body>
@@ -544,7 +729,6 @@
                     <div>
                         <button class="btn btn-admin" id="collapseToggle">
                             <i class="fas fa-compress-alt me-2" id="collapseIcon"></i>
-                            <span id="collapseText">Collapse</span>
                         </button>
                     </div>
                 </div>
@@ -600,14 +784,11 @@
                 main.classList.toggle('expanded');
                 
                 const icon = document.getElementById('collapseIcon');
-                const text = document.getElementById('collapseText');
                 
                 if (sidebar.classList.contains('collapsed')) {
                     icon.className = 'fas fa-expand-alt me-2';
-                    text.textContent = 'Expand';
                 } else {
                     icon.className = 'fas fa-compress-alt me-2';
-                    text.textContent = 'Collapse';
                 }
             });
             
@@ -630,6 +811,6 @@
     </script>
     
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://kit.fontawesome.com/your-fontawesome-kit.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </body>
 </html>

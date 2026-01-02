@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Daily Reminder - Your Daily Dose of Self-Improvement</title>
+    <title>Daily Reminder - Today's Inspiration</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -16,421 +16,225 @@
             }
         }
     </script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
-<body class="bg-gray-50">
-    <!-- Navigation -->
-    <nav class="bg-white shadow-sm border-b">
+<body class="bg-gradient-to-br from-blue-50 to-indigo-100 min-h-screen">
+    <!-- Header -->
+    <header class="bg-white shadow-sm border-b">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-16">
                 <div class="flex items-center">
                     <div class="flex-shrink-0">
-                        <h1 class="text-2xl font-bold text-blue-600">Daily Reminder</h1>
+                        <h1 class="text-2xl font-bold text-blue-600">
+                            <i class="fas fa-sun mr-2"></i>Daily Reminder
+                        </h1>
                     </div>
                 </div>
                 <div class="hidden md:block">
                     <div class="ml-10 flex items-baseline space-x-4">
-                        <a href="#features" class="text-gray-600 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium transition duration-200">Features</a>
-                        <a href="#about" class="text-gray-600 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium transition duration-200">About</a>
-                        <a href="#contact" class="text-gray-600 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium transition duration-200">Contact</a>
-                        <a href="{{ route('login') }}" class="bg-blue-600 text-white hover:bg-blue-700 px-4 py-2 rounded-md text-sm font-medium transition duration-200">Login</a>
-                        <a href="{{ route('register') }}" class="bg-gray-100 text-gray-700 hover:bg-gray-200 px-4 py-2 rounded-md text-sm font-medium transition duration-200">Sign Up</a>
+                        <a href="{{ route('admin.dashboard') }}" class="text-gray-600 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium transition duration-200">
+                            <i class="fas fa-cog mr-1"></i>Admin
+                        </a>
                     </div>
                 </div>
-                <!-- Mobile menu button -->
-                <div class="md:hidden">
-                    <button type="button" class="bg-gray-50 inline-flex items-center justify-center p-2 rounded-md text-gray-600 hover:text-blue-600 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500" aria-controls="mobile-menu" aria-expanded="false">
-                        <span class="sr-only">Open main menu</span>
-                        <svg class="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-                        </svg>
-                    </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        @if($reminder)
+            <!-- Daily Reminder Card -->
+            <div class="bg-white rounded-2xl shadow-xl overflow-hidden">
+                <!-- Card Header -->
+                <div class="bg-gradient-to-r from-blue-500 to-purple-600 text-white p-8 text-center">
+                    <div class="flex items-center justify-center mb-4">
+                        @if($reminder->category == 'motivation')
+                            <i class="fas fa-rocket fa-3x"></i>
+                        @elseif($reminder->category == 'reflection')
+                            <i class="fas fa-brain fa-3x"></i>
+                        @elseif($reminder->category == 'self-discipline')
+                            <i class="fas fa-dumbbell fa-3x"></i>
+                        @else
+                            <i class="fas fa-star fa-3x"></i>
+                        @endif
+                    </div>
+                    <h2 class="text-3xl font-bold mb-2">Today's Daily Reminder</h2>
+                    <p class="text-blue-100">{{ now()->format('l, F j, Y') }}</p>
                 </div>
-            </div>
-        </div>
-        <!-- Mobile menu -->
-        <div class="md:hidden" id="mobile-menu">
-            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-white border-t">
-                <a href="#features" class="text-gray-600 hover:text-blue-600 block px-3 py-2 rounded-md text-base font-medium">Features</a>
-                <a href="#about" class="text-gray-600 hover:text-blue-600 block px-3 py-2 rounded-md text-base font-medium">About</a>
-                <a href="#contact" class="text-gray-600 hover:text-blue-600 block px-3 py-2 rounded-md text-base font-medium">Contact</a>
-                <a href="{{ route('login') }}" class="bg-blue-600 text-white block px-3 py-2 rounded-md text-base font-medium">Login</a>
-                <a href="{{ route('register') }}" class="bg-gray-100 text-gray-700 block px-3 py-2 rounded-md text-base font-medium">Sign Up</a>
-            </div>
-        </div>
-    </nav>
 
-    <!-- Hero Section -->
-    <div class="relative bg-gradient-to-br from-blue-50 to-indigo-100 overflow-hidden">
-        <div class="max-w-7xl mx-auto">
-            <div class="relative z-10 pb-8 bg-transparent sm:pb-16 md:pb-20 lg:max-w-2xl lg:w-full lg:pb-28 xl:pb-32">
-                <main class="mt-10 mx-auto max-w-7xl px-4 sm:mt-12 sm:px-6 md:mt-16 lg:mt-20 lg:px-8 xl:mt-28">
-                    <div class="sm:text-center lg:text-left">
-                        <h1 class="text-4xl tracking-tight font-extrabold text-gray-900 sm:text-5xl md:text-6xl">
-                            <span class="block xl:inline">Transform Your Life</span>
-                            <span class="block text-blue-600 xl:inline">One Day at a Time</span>
-                        </h1>
-                        <p class="mt-3 text-base text-gray-500 sm:mt-5 sm:text-lg sm:max-w-xl sm:mx-auto md:mt-5 md:text-xl lg:mx-0">
-                            Build better habits, track your progress, and achieve your goals with our intelligent daily reminder system. Start your journey to personal growth today.
-                        </p>
-                        <div class="mt-5 sm:mt-8 sm:flex sm:justify-center lg:justify-start">
-                            <div class="rounded-md shadow">
-                                <a href="{{ route('register') }}" class="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 md:py-4 md:text-lg md:px-10 transition duration-200">
-                                    Get Started Free
-                                </a>
-                            </div>
-                            <div class="mt-3 sm:mt-0 sm:ml-3">
-                                <a href="#features" class="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-blue-700 bg-blue-100 hover:bg-blue-200 md:py-4 md:text-lg md:px-10 transition duration-200">
-                                    Learn More
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </main>
-            </div>
-        </div>
-        <div class="lg:absolute lg:inset-y-0 lg:right-0 lg:w-1/2">
-            <img class="h-56 w-full object-cover sm:h-72 md:h-96 lg:w-full lg:h-full" src="https://images.unsplash.com/photo-1557804506-669a67965ba0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2574&q=80" alt="Person using daily reminder app">
-        </div>
-    </div>
-
-    <!-- Features Section -->
-    <div id="features" class="py-12 bg-white">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="lg:text-center">
-                <h2 class="text-base text-blue-600 font-semibold tracking-wide uppercase">Features</h2>
-                <p class="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl">
-                    Everything you need to succeed
-                </p>
-                <p class="mt-4 max-w-2xl text-xl text-gray-500 lg:mx-auto">
-                    Powerful tools to help you build lasting habits and achieve your goals.
-                </p>
-            </div>
-
-            <div class="mt-10">
-                <dl class="space-y-10 md:space-y-0 md:grid md:grid-cols-2 md:gap-x-8 md:gap-y-10">
-                    <div class="relative">
-                        <dt>
-                            <div class="absolute flex items-center justify-center h-12 w-12 rounded-md bg-blue-500 text-white">
-                                <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                </svg>
-                            </div>
-                            <p class="ml-16 text-lg leading-6 font-medium text-gray-900">Smart Reminders</p>
-                        </dt>
-                        <dd class="mt-2 ml-16 text-base text-gray-500">
-                            Get personalized reminders at the right time to build and maintain positive habits.
-                        </dd>
-                    </div>
-
-                    <div class="relative">
-                        <dt>
-                            <div class="absolute flex items-center justify-center h-12 w-12 rounded-md bg-blue-500 text-white">
-                                <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
-                                </svg>
-                            </div>
-                            <p class="ml-16 text-lg leading-6 font-medium text-gray-900">Progress Tracking</p>
-                        </dt>
-                        <dd class="mt-2 ml-16 text-base text-gray-500">
-                            Visualize your progress with detailed analytics and insights into your habit formation journey.
-                        </dd>
-                    </div>
-
-                    <div class="relative">
-                        <dt>
-                            <div class="absolute flex items-center justify-center h-12 w-12 rounded-md bg-blue-500 text-white">
-                                <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3a1 1 0 011-1h6a1 1 0 011 1v4h3a2 2 0 012 2v11a2 2 0 01-2 2H5a2 2 0 01-2-2V9a2 2 0 012-2h3z" />
-                                </svg>
-                            </div>
-                            <p class="ml-16 text-lg leading-6 font-medium text-gray-900">Reflection Journal</p>
-                        </dt>
-                        <dd class="mt-2 ml-16 text-base text-gray-500">
-                            Record your thoughts and experiences to better understand your growth and celebrate your achievements.
-                        </dd>
-                    </div>
-
-                    <div class="relative">
-                        <dt>
-                            <div class="absolute flex items-center justify-center h-12 w-12 rounded-md bg-blue-500 text-white">
-                                <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
-                                </svg>
-                            </div>
-                            <p class="ml-16 text-lg leading-6 font-medium text-gray-900">Instant Motivation</p>
-                        </dt>
-                        <dd class="mt-2 ml-16 text-base text-gray-500">
-                            Receive motivational quotes and tips to keep you inspired and on track with your goals.
-                        </dd>
-                    </div>
-                </dl>
-            </div>
-        </div>
-    </div>
-
-    <!-- About Section -->
-    <div id="about" class="py-16 bg-white">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="lg:text-center">
-                <h2 class="text-3xl font-extrabold text-gray-900 sm:text-4xl">About Daily Reminder</h2>
-                <p class="mt-4 max-w-2xl text-xl text-gray-500 lg:mx-auto">
-                    We're passionate about helping people build better habits and achieve their goals through personalized daily reminders.
-                </p>
-            </div>
-            <div class="mt-16">
-                <div class="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
+                <!-- Card Body -->
+                <div class="p-8">
                     <div class="text-center">
-                        <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                            <svg class="w-8 h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
-                            </svg>
-                        </div>
-                        <h3 class="text-lg font-medium text-gray-900 mb-2">Our Mission</h3>
-                        <p class="text-gray-500">To empower individuals to build lasting positive habits through intelligent, personalized daily reminders and progress tracking.</p>
-                    </div>
-                    
-                    <div class="text-center">
-                        <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                            <svg class="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
-                            </svg>
-                        </div>
-                        <h3 class="text-lg font-medium text-gray-900 mb-2">Our Team</h3>
-                        <p class="text-gray-500">A passionate group of developers, psychologists, and habit formation experts dedicated to your personal growth journey.</p>
-                    </div>
-                    
-                    <div class="text-center">
-                        <div class="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                            <svg class="w-8 h-8 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                            </svg>
-                        </div>
-                        <h3 class="text-lg font-medium text-gray-900 mb-2">Proven Results</h3>
-                        <p class="text-gray-500">Our scientifically-backed approach has helped thousands of users build lasting habits and achieve their personal goals.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Benefits Section -->
-    <div class="bg-blue-50">
-        <div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:py-16 lg:px-8">
-            <h2 class="text-3xl font-extrabold text-gray-900 sm:text-4xl">
-                <span class="block">Why Choose Daily Reminder?</span>
-                <span class="block text-blue-600">Join thousands of successful habit builders</span>
-            </h2>
-            <div class="mt-8 grid grid-cols-1 gap-8 md:grid-cols-3">
-                <div class="bg-white rounded-lg shadow-md p-6">
-                    <div class="flex items-center">
-                        <div class="flex-shrink-0">
-                            <div class="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center">
-                                <svg class="w-5 h-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                                </svg>
+                        <!-- Category Badge -->
+                        @if($reminder->category)
+                            <div class="mb-6">
+                                @if($reminder->category == 'motivation')
+                                    <span class="inline-flex items-center px-4 py-2 rounded-full text-sm font-medium bg-blue-100 text-blue-800">
+                                        <i class="fas fa-rocket mr-2"></i>{{ ucfirst($reminder->category) }}
+                                    </span>
+                                @elseif($reminder->category == 'reflection')
+                                    <span class="inline-flex items-center px-4 py-2 rounded-full text-sm font-medium bg-green-100 text-green-800">
+                                        <i class="fas fa-brain mr-2"></i>{{ ucfirst($reminder->category) }}
+                                    </span>
+                                @elseif($reminder->category == 'self-discipline')
+                                    <span class="inline-flex items-center px-4 py-2 rounded-full text-sm font-medium bg-yellow-100 text-yellow-800">
+                                        <i class="fas fa-dumbbell mr-2"></i>{{ ucfirst($reminder->category) }}
+                                    </span>
+                                @else
+                                    <span class="inline-flex items-center px-4 py-2 rounded-full text-sm font-medium bg-purple-100 text-purple-800">
+                                        <i class="fas fa-star mr-2"></i>{{ ucfirst($reminder->category) }}
+                                    </span>
+                                @endif
                             </div>
-                        </div>
-                        <div class="ml-4">
-                            <p class="text-lg font-medium text-gray-900">Proven Results</p>
-                        </div>
-                    </div>
-                    <p class="mt-2 text-base text-gray-500">
-                        Users report 85% better habit adherence within 30 days of using our platform.
-                    </p>
-                </div>
-                
-                <div class="bg-white rounded-lg shadow-md p-6">
-                    <div class="flex items-center">
-                        <div class="flex-shrink-0">
-                            <div class="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center">
-                                <svg class="w-5 h-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                </svg>
-                            </div>
-                        </div>
-                        <div class="ml-4">
-                            <p class="text-lg font-medium text-gray-900">Save Time</p>
-                        </div>
-                    </div>
-                    <p class="mt-2 text-base text-gray-500">
-                        Automated reminders and tracking save you 30+ minutes per week compared to manual methods.
-                    </p>
-                </div>
-                
-                <div class="bg-white rounded-lg shadow-md p-6">
-                    <div class="flex items-center">
-                        <div class="flex-shrink-0">
-                            <div class="w-8 h-8 bg-purple-500 rounded-full flex items-center justify-center">
-                                <svg class="w-5 h-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
-                                </svg>
-                            </div>
-                        </div>
-                        <div class="ml-4">
-                            <p class="text-lg font-medium text-gray-900">Stay Motivated</p>
-                        </div>
-                    </div>
-                    <p class="mt-2 text-base text-gray-500">
-                        Built-in motivation system keeps you engaged and excited about your personal growth journey.
-                    </p>
-                </div>
-            </div>
-        </div>
-    </div>
+                        @endif
 
-    <!-- CTA Section -->
-    <div class="bg-blue-600">
-        <div class="max-w-2xl mx-auto text-center py-16 px-4 sm:py-20 sm:px-6 lg:px-8">
-            <h2 class="text-3xl font-extrabold text-white sm:text-4xl">
-                <span class="block">Ready to start your journey?</span>
-                <span class="block">Join Daily Reminder today.</span>
-            </h2>
-            <p class="mt-4 text-lg leading-6 text-blue-200">
-                Transform your habits and achieve your goals with our intelligent reminder system.
-            </p>
-            <a href="{{ route('register') }}" class="mt-8 w-full inline-flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-blue-600 bg-white hover:bg-blue-50 sm:w-auto">
-                Start Your Free Trial
-            </a>
-        </div>
-    </div>
+                        <!-- Reminder Message -->
+                        <div class="mb-8">
+                            <blockquote class="text-2xl md:text-3xl font-medium text-gray-900 leading-relaxed">
+                                <i class="fas fa-quote-left text-blue-300 text-lg mr-2"></i>
+                                {{ $reminder->message }}
+                                <i class="fas fa-quote-right text-blue-300 text-lg ml-2"></i>
+                            </blockquote>
+                        </div>
 
-    <!-- Contact Section -->
-    <div id="contact" class="bg-gray-50 py-16">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center">
-                <h2 class="text-3xl font-extrabold text-gray-900 sm:text-4xl">Get in Touch</h2>
-                <p class="mt-4 text-xl text-gray-500">
-                    Have questions? We'd love to hear from you. Send us a message and we'll respond as soon as possible.
-                </p>
-            </div>
-            
-            <div class="mt-12 grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
-                <div class="text-center">
-                    <div class="w-12 h-12 bg-blue-500 rounded-full flex items-center justify-center mx-auto mb-4">
-                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
-                        </svg>
-                    </div>
-                    <h3 class="text-lg font-medium text-gray-900 mb-2">Email Us</h3>
-                    <p class="text-gray-500">support@dailyreminder.com</p>
-                </div>
-                
-                <div class="text-center">
-                    <div class="w-12 h-12 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-4">
-                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path>
-                        </svg>
-                    </div>
-                    <h3 class="text-lg font-medium text-gray-900 mb-2">Call Us</h3>
-                    <p class="text-gray-500">+1 (555) 123-4567</p>
-                </div>
-                
-                <div class="text-center">
-                    <div class="w-12 h-12 bg-purple-500 rounded-full flex items-center justify-center mx-auto mb-4">
-                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
-                        </svg>
-                    </div>
-                    <h3 class="text-lg font-medium text-gray-900 mb-2">Visit Us</h3>
-                    <p class="text-gray-500">123 Innovation Drive<br>San Francisco, CA 94105</p>
-                </div>
-            </div>
-            
-            <!-- Contact Form -->
-            <div class="mt-12 max-w-lg mx-auto">
-                <form class="bg-white shadow-md rounded-lg p-6">
-                    <div class="grid grid-cols-1 gap-6">
-                        <div>
-                            <label for="name" class="block text-sm font-medium text-gray-700">Name</label>
-                            <input type="text" id="name" name="name" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500">
+                        <!-- Date Info -->
+                        <div class="text-sm text-gray-500 mb-6">
+                            @if($reminder->scheduled_date)
+                                <i class="fas fa-calendar-alt mr-1"></i>
+                                Scheduled for: {{ \Carbon\Carbon::parse($reminder->scheduled_date)->format('F j, Y') }}
+                            @else
+                                <i class="fas fa-infinity mr-1"></i>
+                                General reminder
+                            @endif
                         </div>
-                        
-                        <div>
-                            <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
-                            <input type="email" id="email" name="email" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500">
-                        </div>
-                        
-                        <div>
-                            <label for="message" class="block text-sm font-medium text-gray-700">Message</label>
-                            <textarea id="message" name="message" rows="4" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"></textarea>
-                        </div>
-                        
-                        <div>
-                            <button type="submit" class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
-                                Send Message
+
+                        <!-- Action Buttons -->
+                        <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                            <button onclick="shareReminder()" class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 transition duration-200">
+                                <i class="fas fa-share mr-2"></i>Share
                             </button>
+                            <button onclick="shuffleReminder()" class="inline-flex items-center px-6 py-3 border border-gray-300 text-base font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 transition duration-200">
+                                <i class="fas fa-random mr-2"></i>Shuffle
+                            </button>
+                            <button onclick="copyReminder()" class="inline-flex items-center px-6 py-3 border border-gray-300 text-base font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 transition duration-200">
+                                <i class="fas fa-copy mr-2"></i>Copy
+                            </button>
+                            <a href="{{ route('admin.dashboard') }}" class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-purple-600 hover:bg-purple-700 transition duration-200">
+                                <i class="fas fa-plus mr-2"></i>Add New
+                            </a>
                         </div>
                     </div>
-                </form>
+                </div>
             </div>
-        </div>
-    </div>
+
+            <!-- Additional Information -->
+            <div class="mt-8 text-center">
+                <p class="text-gray-600">
+                    <i class="fas fa-info-circle mr-1"></i>
+                    Admins can create and schedule new reminders through the admin panel.
+                </p>
+            </div>
+
+        @else
+            <!-- No Reminder Available -->
+            <div class="bg-white rounded-2xl shadow-xl p-12 text-center">
+                <div class="mb-6">
+                    <i class="fas fa-inbox fa-4x text-gray-300"></i>
+                </div>
+                <h2 class="text-3xl font-bold text-gray-900 mb-4">No Reminder Available</h2>
+                <p class="text-lg text-gray-600 mb-8">
+                    There are no reminders set up yet. Add your first reminder to get started!
+                </p>
+                <a href="{{ route('admin.dashboard') }}" class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 transition duration-200">
+                    <i class="fas fa-plus mr-2"></i>Create First Reminder
+                </a>
+            </div>
+        @endif
+    </main>
 
     <!-- Footer -->
-    <footer class="bg-gray-800">
-        <div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 md:flex md:items-center md:justify-between lg:px-8">
-            <div class="flex justify-center space-x-6 md:order-2">
-                <a href="#" class="text-gray-400 hover:text-gray-300">
-                    <span class="sr-only">Twitter</span>
-                    <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.713v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84" />
-                    </svg>
-                </a>
-                <a href="#" class="text-gray-400 hover:text-gray-300">
-                    <span class="sr-only">LinkedIn</span>
-                    <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
-                        <path fill-rule="evenodd" d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" clip-rule="evenodd" />
-                    </svg>
-                </a>
-            </div>
-            <div class="mt-8 md:mt-0 md:order-1">
-                <p class="text-center text-base text-gray-400">
-                    &copy; 2024 Daily Reminder. All rights reserved.
+    <footer class="bg-white border-t mt-16">
+        <div class="max-w-7xl mx-auto py-8 px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <p class="text-gray-500">
+                    <i class="fas fa-heart text-red-500 mr-1"></i>
+                    Daily Reminder - Inspiring you every day
                 </p>
             </div>
         </div>
     </footer>
 
-    <!-- JavaScript for navigation and smooth scrolling -->
+    <!-- JavaScript for interactions -->
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Mobile menu toggle
-            const mobileMenuButton = document.querySelector('[aria-controls="mobile-menu"]');
-            const mobileMenu = document.getElementById('mobile-menu');
+        function shareReminder() {
+            const reminderText = "{{ $reminder ? $reminder->message : '' }}";
+            const shareText = `Today's Daily Reminder: "${reminderText}"`;
             
-            mobileMenuButton.addEventListener('click', function() {
-                const isExpanded = mobileMenuButton.getAttribute('aria-expanded') === 'true';
-                
-                mobileMenuButton.setAttribute('aria-expanded', !isExpanded);
-                mobileMenu.classList.toggle('hidden');
-            });
-            
-            // Smooth scrolling for navigation links
-            const navLinks = document.querySelectorAll('a[href^="#"]');
-            
-            navLinks.forEach(link => {
-                link.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    
-                    const targetId = this.getAttribute('href');
-                    const targetSection = document.querySelector(targetId);
-                    
-                    if (targetSection) {
-                        const offsetTop = targetSection.offsetTop - 80; // Account for fixed nav
-                        
-                        window.scrollTo({
-                            top: offsetTop,
-                            behavior: 'smooth'
-                        });
-                        
-                        // Close mobile menu if open
-                        mobileMenu.classList.add('hidden');
-                        mobileMenuButton.setAttribute('aria-expanded', 'false');
-                    }
+            if (navigator.share) {
+                navigator.share({
+                    title: 'Daily Reminder',
+                    text: shareText
                 });
+            } else {
+                copyToClipboard(shareText);
+                showNotification('Reminder copied to clipboard!');
+            }
+        }
+
+        function shuffleReminder() {
+            // Add a random parameter to force page refresh with new random reminder
+            const randomParam = Math.random().toString(36).substring(2, 15);
+            const currentUrl = new URL(window.location);
+            currentUrl.searchParams.set('shuffle', randomParam);
+            window.location.href = currentUrl.toString();
+        }
+
+        function copyReminder() {
+            const reminderText = "{{ $reminder ? $reminder->message : '' }}";
+            copyToClipboard(reminderText);
+            showNotification('Reminder copied to clipboard!');
+        }
+
+        function copyToClipboard(text) {
+            navigator.clipboard.writeText(text).then(function() {
+                showNotification('Copied to clipboard!');
+            }, function(err) {
+                console.error('Could not copy text: ', err);
             });
-        });
+        }
+
+        function showNotification(message) {
+            // Create notification element
+            const notification = document.createElement('div');
+            notification.className = 'fixed top-4 right-4 bg-green-500 text-white px-6 py-3 rounded-lg shadow-lg z-50 transform transition-transform duration-300 translate-x-full';
+            notification.innerHTML = `
+                <div class="flex items-center">
+                    <i class="fas fa-check-circle mr-2"></i>
+                    <span>${message}</span>
+                </div>
+            `;
+            
+            document.body.appendChild(notification);
+            
+            // Animate in
+            setTimeout(() => {
+                notification.classList.remove('translate-x-full');
+            }, 100);
+            
+            // Remove after 3 seconds
+            setTimeout(() => {
+                notification.classList.add('translate-x-full');
+                setTimeout(() => {
+                    document.body.removeChild(notification);
+                }, 300);
+            }, 3000);
+        }
+
+        // Auto-refresh page every 5 minutes to check for new content
+        setTimeout(() => {
+            window.location.reload();
+        }, 5 * 60 * 1000);
     </script>
 </body>
 </html>

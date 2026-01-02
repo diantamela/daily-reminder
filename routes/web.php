@@ -5,9 +5,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ReflectionController;
 
-Route::get('/', function () {
-    return view('landing');
-})->name('landing');
+Route::get('/', [HomeController::class, 'landing'])->name('landing');
 
 // Authenticated user dashboard - redirect admins away
 Route::get('/home', [HomeController::class, 'index'])->name('home');
