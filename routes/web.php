@@ -5,9 +5,11 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ReflectionController;
 
-Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/', function () {
+    return view('landing');
+})->name('landing');
 
-// Public routes
+// Authenticated user dashboard
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 
 // Authentication routes
