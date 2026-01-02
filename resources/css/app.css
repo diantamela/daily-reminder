@@ -1,2 +1,38 @@
-/* Custom styles can be added here */
-/* Tailwind CSS is loaded via CDN in the landing page */
+/* 
+ * Main application styles
+ * Used by pages that extend layouts/app.blade.php
+ * Landing page uses Tailwind CSS from CDN
+ */
+
+/* Basic utility classes for pages using Bootstrap */
+.container {
+    max-width: 1200px;
+}
+
+.card {
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border: none;
+    border-radius: 0.5rem;
+}
+
+.reminder-card {
+    min-height: 300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.streak-badge {
+    background-color: #10b981 !important;
+    color: white;
+}
+
+.days-badge {
+    background-color: #3b82f6 !important;
+    color: white;
+}
+
+.category-badge {
+    font-size: 0.75rem;
+    padding: 0.25rem 0.5rem;
+}

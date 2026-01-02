@@ -12,7 +12,8 @@ class LoginController extends Controller
 
     public function __construct()
     {
-        $this->middleware('guest')->except('logout');
+        // Middleware is handled in routes/web.php for now
+        // $this->middleware('guest')->except('logout');
     }
 
     public function showLoginForm()
